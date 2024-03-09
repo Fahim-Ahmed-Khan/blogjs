@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <title>Blog_js - Blog</title>
+  <style>
+    /* Center the heading and create-article button */
+    .center-container {
+      text-align: center;
+    }
+
+    /* Move create article button below the title */
+    .create-article {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mb-4">
+    <div class="center-container">
+      <h1>Welcome to Blog_js Blog</h1>
+      <a href="/articles/new" class="btn btn-success create-article">Create Article</a>
+    </div>
+    <div class="row">
+      <% articles.forEach(article => { %>
+      <div class="col-md-4">
+        <div class="card mt-4">
+          <div class="card-body">
+            <h4 class="card-title"><%= article.title %></h4>
+            <div class="card-subtitle text-muted mb-2">
+              <%= article.createdAt.toLocaleDateString() %>
+            </div>
+            <div class="card-text mb-2">
+              <%= article.description %>
+            </div>
+            <a href="/articles/<%= article.slug %>" class="btn btn-primary">Read More</a>
+            <form action="/articles/<%=article.id %>?_method=DELETE" method="POST" class="d-inline">
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+  </div>
+</body>
+</html>
